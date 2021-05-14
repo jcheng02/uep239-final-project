@@ -1,9 +1,9 @@
 # Suitability Analysis: Best ZCTA Within the Boston Area to Live Without a Car 
-**Tufts University\
-Department of Urban and Environmental Policy and Planning\
-UEP-239: Geospatial Programming with Python**\
-Final Project\
-By: Justina Cheng\
+**Tufts University<br>
+Department of Urban and Environmental Policy and Planning<br>
+UEP-239: Geospatial Programming with Python**<br>
+Final Project<br>
+By: Justina Cheng<br>
 May 2021
 
 ---
@@ -54,211 +54,98 @@ Zillow data was also considered as a source, but it was much more limited in ext
 Choropleth colormaps were standardized based on the type of data to make them easily distinguishable: averages were mapped with `OrRd`, densities were mapped with `YlGnBu`, and reclassified data were mapped with `plasma`. 
 
 ---
+---
 
 # Instructions to Run Notebook
-To run this notebook, first create the `suitability` environment from the `environment.yml` in the directory.
+To run this notebook, first create the `suitability` environment from the `environment.yml` in the directory. 
+
+---
+---
 
 # Data Used
 All data used was processed within the Jupyter Notebook.
 
 ## Base Map
-```{list-table}
-:header-rows: 1
-:widths: 10 20 5 5 5 5
-
-* - Filename
-  - Description
-  - Format
-  - Feature
-  - CRS
-  - Source
-* - `MPO_Boundaries`
-  - Boundaries of Massachusetts Metropolitan Planning Organizations
-  - ESRI Shapefile
-  - Polygon
-  - [EPSG:3857](https://epsg.io/3857)
-  - [MassDOT](https://geo-massdot.opendata.arcgis.com/datasets/mpo-boundaries)
-* - `tl_2010_25_zcta510`
-  - 2010 Massachusetts 5-Digit Zip Code Tabulation Area (ZCTA) Boundaries
-  - ESRI Shapefile
-  - Polygon
-  - [EPSG:4269](https://epsg.io/4269)
-  - [Census Bureau](https://www.census.gov/cgi-bin/geo/shapefiles/)
-* - `HYDRO25K_POLY`
-  - Massachusetts Surface Water
-  - ESRI Shapefile
-  - Polygon
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-massdep-hydrography-125000)
-* - `NEWMASK_POLY`
-  - New England Mask Around Massachusetts
-  - ESRI Shapefile
-  - Polygon
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-new-england-boundaries)
-* - `OUTLINE25K_POLY`
-  - Massachusetts Outline with Detailed Coastline
-  - ESRI Shapefile
-  - Polygon
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-state-outlines)
-```
+Filename | Description | Format | Feature | CRS | Source 
+-------- | ----------- | ------ | ------- | --- | ------
+`MPO_Boundaries` | Boundaries of Massachusetts Metropolitan Planning Organizations | ESRI Shapefile | Polygon | [EPSG:3857](https://epsg.io/3857) | [MassDOT](https://geo-massdot.opendata.arcgis.com/datasets/mpo-boundaries)
+`tl_2010_25_zcta510` | 2010 Massachusetts 5-Digit Zip Code Tabulation Area (ZCTA) Boundaries | ESRI Shapefile | Polygon | [EPSG:4269](https://epsg.io/4269) | [Census Bureau](https://www.census.gov/cgi-bin/geo/shapefiles/)
+`HYDRO25K_POLY` | Massachusetts Surface Water | ESRI Shapefile | Polygon | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-massdep-hydrography-125000)
+`NEWMASK_POLY` | New England Mask Around Massachusetts | ESRI Shapefile | Polygon | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-new-england-boundaries)
+`OUTLINE25K_POLY` | Massachusetts Outline with Detailed Coastline | ESRI Shapefile | Polygon | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-state-outlines)
 
 ## Mass Transit
-```{list-table}
-:header-rows: 1
-:widths: 10 20 5 5 5 5
-
-* - Filename
-  - Description
-  - Format
-  - Feature
-  - CRS
-  - Source
-* - `MBTABUSSTOPS_PT`
-  - MBTA Bus Stops
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-bus-routes-and-stops)
-* - `MBTABUSROUTES_ARC`
-  - MBTA Bus Routes
-  - ESRI Shapefile
-  - Line
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-bus-routes-and-stops)
-* - `MBTA_ARC`
-  - MBTA Rapid Transit Lines
-  - ESRI Shapefile
-  - Line
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-rapid-transit)
-* - `MBTA_NODE`
-  - MBTA Rapid Transit Stops
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-rapid-transit)
-* - `TRAINS_NODE`
-  - Massachusetts Train Stations
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-trains)
-* - `TRAINS_RTE_TRAIN`
-  - MBTA Commuter Rail Routes
-  - ESRI Shapefile
-  - Line
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-trains)
-```
+Filename | Description | Format | Feature | CRS | Source 
+-------- | ----------- | ------ | ------- | --- | ------
+`MBTABUSSTOPS_PT` | MBTA Bus Stops | ESRI Shapefile | Point | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-bus-routes-and-stops)
+`MBTABUSROUTES_ARC` | MBTA Bus Routes | ESRI Shapefile | Line | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-bus-routes-and-stops)
+`MBTA_ARC` | MBTA Rapid Transit Lines | ESRI Shapefile | Line | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-rapid-transit)
+`MBTA_NODE` | MBTA Rapid Transit Stops | ESRI Shapefile | Point | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-rapid-transit)
+`TRAINS_NODE` | Massachusetts Train Stations | ESRI Shapefile | Point | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-trains)
+`TRAINS_RTE_TRAIN` | MBTA Commuter Rail Routes | ESRI Shapefile | Line | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-trains)
 
 ## Colleges
-```{list-table}
-:header-rows: 1
-:widths: 10 20 5 5 5 5
-
-* - Filename
-  - Description
-  - Format
-  - Feature
-  - CRS
-  - Source
-* - `COLLEGES_PT`
-  - Massachusetts Colleges and Universities
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-colleges-and-universities)
-```
+Filename | Description | Format | Feature | CRS | Source 
+-------- | ----------- | ------ | ------- | --- | ------
+`COLLEGES_PT` | Massachusetts Colleges and Universities | ESRI Shapefile | Point | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-colleges-and-universities)
 
 ## Rental Data
-```{list-table}
-:header-rows: 1
-:widths: 10 20 5 5 5 5
-
-* - Filename
-  - Description
-  - Format
-  - Feature
-  - CRS
-  - Source
-* - `20200919_rental_data.csv`
-  - Padmapper Rental Data from 9/19/2020
-  - CSV file
-  - Point
-  - [EPSG:4326](https://epsg.io/4326)
-  - [Jeff Kaufman's Apartment Price Map](https://www.jefftk.com/apartment_prices/details)
-* - `Zip_ZORI_AllHomesPlusMultifamily_SSA.csv`
-  - Zillow Rental Data
-  - CSV file
-  - N/A (zipcodes)
-  - N/A
-  - [Zillow Housing Data](https://www.zillow.com/research/data/)
-```
+Filename | Description | Format | Feature | CRS | Source 
+-------- | ----------- | ------ | ------- | --- | ------
+`20200919_rental_data.csv` | Padmapper Rental Data from 9/19/2020 | CSV file | Point | [EPSG:4326](https://epsg.io/4326) | [Jeff Kaufman's Apartment Price Map](https://www.jefftk.com/apartment_prices/details)
+`Zip_ZORI_AllHomesPlusMultifamily_SSA.csv` | Zillow Rental Data | CSV file | N/A (zipcodes) | N/A | [Zillow Housing Data](https://www.zillow.com/research/data/)
 
 ## Necessities
 Necessities not obtained via `OSMnx`
+Filename | Description | Format | Feature | CRS | Source 
+-------- | ----------- | ------ | ------- | --- | ------
+`CHCS_PT` | Massachusetts Community Health Centers | ESRI Shapefile | Point | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-community-health-centers)
+`FARMERSMARKETS_PT` | Massachusetts Farmers Markets | ESRI Shapefile | Point | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-farmers-markets)
+`FIRESTATIONS_PT_MEMA` | Massachusetts Fire Stations | ESRI Shapefile | Point | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-fire-stations)
+`HOSPITALS_PT` | Massachusetts Acute Care Hospitals | ESRI Shapefile | Point | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-acute-care-hospitals)
+`LIBRARIES_PT` | Massachusetts Public Libraries | ESRI Shapefile | Point | [EPSG:26986](https://epsg.io/26986) | [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-libraries)
+`USPS DDUs.csv` | USPS Destination Delivery Units (DDUs) in a specified map extent | CSV file | Point | [EPSG:3857](https://epsg.io/3857)] | [USPS](https://uspstools.maps.arcgis.com/apps/webappviewer/index.html?id=1fc1c26bb31246b39087606c65b83020)
 
-```{list-table}
-:header-rows: 1
-:widths: 10 20 5 5 5 5
-
-* - Filename
-  - Description
-  - Format
-  - Feature
-  - CRS
-  - Source
-* - `CHCS_PT`
-  - Massachusetts Community Health Centers
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-community-health-centers)
-* - `FARMERSMARKETS_PT`
-  - Massachusetts Farmers Markets
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-farmers-markets)
-* - `FIRESTATIONS_PT_MEMA`
-  - Massachusetts Fire Stations
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-fire-stations)
-* - `HOSPITALS_PT`
-  - Massachusetts Acute Care Hospitals
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-acute-care-hospitals)
-* - `LIBRARIES_PT`
-  - Massachusetts Public Libraries
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-libraries)
-* - `USPS DDUs.csv`
-  - USPS Destination Delivery Units (DDUs) in a specified map extent
-  - [USPS](https://uspstools.maps.arcgis.com/apps/webappviewer/index.html?id=1fc1c26bb31246b39087606c65b83020)
-
-```  
+---
+---
   
 # Packages Used
-  - `numpy`: computing and working with arrays
-  - `pandas`: data analysis and management
-  - `shapely`: manipulation and analysis of planar geometric objects
-  - `geopandas`: geospatial data analysis and management
-  - `matplotlib`: plotting and visualization
-  - `seaborn`: data visualization
-  - `folium`: interactive maps
-  - `networkx`: network analysis
-  - `osmnx`: work with networks in OpenStreetMap
+ - `numpy`: computing and working with arrays
+ - `pandas`: data analysis and management
+ - `shapely`: manipulation and analysis of planar geometric objects
+ - `geopandas`: geospatial data analysis and management
+ - `matplotlib`: plotting and visualization
+ - `seaborn`: data visualization
+ - `folium`: interactive maps
+ - `networkx`: network analysis
+ - `osmnx`: work with networks in OpenStreetMap
+
+---
+---
 
 # Acknowledgements
 
+---
+---
+
 # References
 - [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/#comments)
+- [NumPy documentation](https://numpy.org/doc/stable/)
+- [Pandas documentation](https://pandas.pydata.org/docs/user_guide/index.html#user-guide)
+- [Shapely documentation](https://shapely.readthedocs.io/en/stable/manual.html)
+- [GeoPandas documentation](https://geopandas.org/docs/user_guide.html)
+- [Matplotlib documentation](https://matplotlib.org/stable/contents.html)
+- [Seaborn documentation](https://seaborn.pydata.org/api.html)
+- [Folium documentation](https://python-visualization.github.io/folium/)
+- [NetworkX documentation](https://networkx.org/documentation/stable/)
+- [OSMnx documentation](https://osmnx.readthedocs.io/en/stable/osmnx.html)
+- [EPSG.io](http://epsg.io/)
+- [GitHub: Mastering Markdown Guide](https://guides.github.com/features/mastering-markdown/)
+- [Anita Graser: Interactive plots for GeoPandas GeoDataFrames of LineStrings](https://anitagraser.com/2019/10/31/interactive-plots-for-geopandas-geodataframe-of-linestrings/)
+- [towards data science: Choropleth maps with Folium](https://towardsdatascience.com/choropleth-maps-with-folium-1a5b8bcdd392)
+- UEP239 Homework Assignments 
+- UEP239 Class Exercises
+
+
+
 
