@@ -10,7 +10,7 @@ May 2021
 
 # Abstract
 ## Overview
-The purpose of this suitability analysis is to find the best Zip Code Tabulation Area (ZCTA) within the Boston Area for a Tufts University student and a Boston University student to live together without a car (i.e. somewhere equally convenient for both). Though the self-serving nature of the study is specific to students of Tufts and BU, a similar workflow can be conducted as a general analysis of the Boston Area (by omitting the network analysis between Tufts and BU) or by specifying different locations of interest (e.g. HubSpot's Cambridge office and the Museum of Fine Arts). The workflow can also be applied to any city or region, provided data is available.
+The purpose of this suitability analysis is to find the best Zip Code Tabulation Area (ZCTA) within the Boston Area for a Tufts University student and a Boston University student to live together without a car (i.e. somewhere equally convenient for both). Though the self-serving nature of the study is specific to students of Tufts and BU, a similar workflow can be conducted as a general analysis of the Boston Area (by omitting the network analysis between Tufts and BU) or by specifying different locations of interest (e.g. HubSpot's Cambridge office and the Museum of Fine Arts). The workflow can also be applied to any city or region, provided the necessary data is available.
 
 The study is structured as follows:
 1. Import dependencies
@@ -41,7 +41,7 @@ The analysis concluded that ZCTAs 02145 and 02143 were the best places for a Tuf
 - `reclass_5` takes a value and reclassifies it into 1 of 5 classes given a list of values for class thresholds and order preference.
 - `calc_density` automates density calculations based on counts of records in multiple datasets (e.g. density of food establishments per square kilometer in each ZCTA based on groceries, prepared food, and farmers markets). It takes a base GeoDataFrame and, using function `multimerge`, merges it with a list of GeoDataFrames on the specified column or columns in the list of `on` columns and with the specified `how`. The GDFs within the list are expected to have columns with counts, and those columns are given in a list. The function then adds together the counts in specified columns and calculates the density.
 
-## Miscellaneous
+## Notes
 ### Boston Region vs. Boston Area
 *Boston Region* was used to reference the Boston Region MPO. *Boston Area* was used to distinguish the limited extent.
 
@@ -57,7 +57,19 @@ Choropleth colormaps were standardized based on the type of data to make them ea
 ---
 
 # Instructions to Run Notebook
-To run this notebook, first create the `suitability` environment from the `environment.yml` in the directory. 
+## Run Locally
+1. Download all files within the repository. 
+1. In Terminal, navigate to the folder location.
+1. Create the `suitability` environment from the `environment.yml` file.
+    > `mamba env create -f environment.yml`
+1. Activate the environment 
+    > `conda activate suitability`
+1. Open Jupyter Lab
+    > `jupyter lab`
+1. Open the `.ipynb` file and go through cell by cell.
+
+## Run in Binder
+1. 
 
 ---
 ---
@@ -124,6 +136,11 @@ Filename | Description | Format | Feature | CRS | Source
 ---
 
 # Acknowledgements
+This suitability analysis was created as a final project for Tufts University's UEP-239: Geospatial Programming with Python. I would like to thank the following members of the Tufts UEP community:
+- Uku-Kaspar Uustalu for his tireless efforts in making the class a productive and pleasant experience for the students. His dedication to ensuring students understood Python in both theory and practice was crucial to the success of each student. 
+- Ana Arsovska, Teaching Assistant, for providing guidance both during and outside of office hours and giving valuable feedback on assignments.
+- Sumeeta Srinivasan for facilitating a restructuring of the course and syllabus to ensure content would remain comprehensive after unforeseen circumstances forced an adjustment.
+- Kyle Monahan and Chris Barnett for stepping in as Guest Instructors and introducing students to different perspectives on Python.
 
 ---
 ---
@@ -140,12 +157,15 @@ Filename | Description | Format | Feature | CRS | Source
 - [NetworkX documentation](https://networkx.org/documentation/stable/)
 - [OSMnx documentation](https://osmnx.readthedocs.io/en/stable/osmnx.html)
 - [EPSG.io](http://epsg.io/)
+- [OpenStreetMap: Map features](https://wiki.openstreetmap.org/wiki/Map_features)
+- [Font Awesome: the Icons](https://fontawesome.com/v4.7.0/icons/)
 - [GitHub: Mastering Markdown Guide](https://guides.github.com/features/mastering-markdown/)
 - [Anita Graser: Interactive plots for GeoPandas GeoDataFrames of LineStrings](https://anitagraser.com/2019/10/31/interactive-plots-for-geopandas-geodataframe-of-linestrings/)
 - [towards data science: Choropleth maps with Folium](https://towardsdatascience.com/choropleth-maps-with-folium-1a5b8bcdd392)
-- UEP239 Homework Assignments 
-- UEP239 Class Exercises
-
+- [GitHub Pages](https://pages.github.com/)
+- UEP-239 Homework Assignments 
+- UEP-239 Class Exercises
+- UEP-239 Lectures
 
 
 
