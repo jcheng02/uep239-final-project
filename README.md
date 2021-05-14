@@ -42,6 +42,15 @@ The analysis concluded that ZCTAs 02145 and 02143 were the best places for a Tuf
 - `calc_density` automates density calculations based on counts of records in multiple datasets (e.g. density of food establishments per square kilometer in each ZCTA based on groceries, prepared food, and farmers markets). It takes a base GeoDataFrame and, using function `multimerge`, merges it with a list of GeoDataFrames on the specified column or columns in the list of `on` columns and with the specified `how`. The GDFs within the list are expected to have columns with counts, and those columns are given in a list. The function then adds together the counts in specified columns and calculates the density.
 
 ## Miscellaneous
+### Boston Region vs. Boston Area
+*Boston Region* was used to reference the Boston Region MPO. *Boston Area* was used to distinguish the limited extent.
+
+### Rental Data
+Data was obtained from [Jeff Kaufman's Apartment Price Map](https://www.jefftk.com/apartment_prices/details), which scrapes data from [Padmapper](https://www.padmapper.com/). Though the dataset does not cover the entire defined extent (53 of 62 ZCTAs are represented), it was the best source of point data found for the Boston Region.
+
+Zillow data was also considered as a source, but it was much more limited in extent. Only 37 of the 62 ZCTAs in question were available in the Zillow dataset. Zillow analysis has been included as an appendix at the end of the study for those who are curious.
+
+### Colormaps
 Choropleth colormaps were standardized based on the type of data to make them easily distinguishable: averages were mapped with `OrRd`, densities were mapped with `YlGnBu`, and reclassified data were mapped with `plasma`. 
 
 ---
@@ -50,6 +59,146 @@ Choropleth colormaps were standardized based on the type of data to make them ea
 To run this notebook, first create the `suitability` environment from the `environment.yml` in the directory.
 
 # Data Used
+All data used was processed within the Jupyter Notebook.
+
+## Base Map
+```{list-table}
+:header-rows: 1
+:widths: 10 20 5 5 5 5
+
+* - Filename
+  - Description
+  - Format
+  - Feature
+  - CRS
+  - Source
+* - `MPO_Boundaries`
+  - Boundaries of Massachusetts Metropolitan Planning Organizations
+  - ESRI Shapefile
+  - Polygon
+  - [EPSG:3857](https://epsg.io/3857)
+  - [MassDOT](https://geo-massdot.opendata.arcgis.com/datasets/mpo-boundaries)
+* - `tl_2010_25_zcta510`
+  - 2010 Massachusetts 5-Digit Zip Code Tabulation Area (ZCTA) Boundaries
+  - ESRI Shapefile
+  - Polygon
+  - [EPSG:4269](https://epsg.io/4269)
+  - [Census Bureau](https://www.census.gov/cgi-bin/geo/shapefiles/)
+* - `HYDRO25K_POLY`
+  - Massachusetts Surface Water
+  - ESRI Shapefile
+  - Polygon
+  - [EPSG:26986](https://epsg.io/26986)
+  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-massdep-hydrography-125000)
+* - `NEWMASK_POLY`
+  - New England Mask Around Massachusetts
+  - ESRI Shapefile
+  - Polygon
+  - [EPSG:26986](https://epsg.io/26986)
+  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-new-england-boundaries)
+* - `OUTLINE25K_POLY`
+  - Massachusetts Outline with Detailed Coastline
+  - ESRI Shapefile
+  - Polygon
+  - [EPSG:26986](https://epsg.io/26986)
+  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-state-outlines)
+```
+
+## Mass Transit
+```{list-table}
+:header-rows: 1
+:widths: 10 20 5 5 5 5
+
+* - Filename
+  - Description
+  - Format
+  - Feature
+  - CRS
+  - Source
+* - `MBTABUSSTOPS_PT`
+  - MBTA Bus Stops
+  - ESRI Shapefile
+  - Point
+  - [EPSG:26986](https://epsg.io/26986)
+  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-bus-routes-and-stops)
+* - `MBTABUSROUTES_ARC`
+  - MBTA Bus Routes
+  - ESRI Shapefile
+  - Line
+  - [EPSG:26986](https://epsg.io/26986)
+  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-bus-routes-and-stops)
+* - `MBTA_ARC`
+  - MBTA Rapid Transit Lines
+  - ESRI Shapefile
+  - Line
+  - [EPSG:26986](https://epsg.io/26986)
+  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-rapid-transit)
+* - `MBTA_NODE`
+  - MBTA Rapid Transit Stops
+  - ESRI Shapefile
+  - Point
+  - [EPSG:26986](https://epsg.io/26986)
+  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-rapid-transit)
+* - `TRAINS_NODE`
+  - Massachusetts Train Stations
+  - ESRI Shapefile
+  - Point
+  - [EPSG:26986](https://epsg.io/26986)
+  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-trains)
+* - `TRAINS_RTE_TRAIN`
+  - MBTA Commuter Rail Routes
+  - ESRI Shapefile
+  - Line
+  - [EPSG:26986](https://epsg.io/26986)
+  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-trains)
+```
+
+## Colleges
+```{list-table}
+:header-rows: 1
+:widths: 10 20 5 5 5 5
+
+* - Filename
+  - Description
+  - Format
+  - Feature
+  - CRS
+  - Source
+* - `COLLEGES_PT`
+  - Massachusetts Colleges and Universities
+  - ESRI Shapefile
+  - Point
+  - [EPSG:26986](https://epsg.io/26986)
+  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-colleges-and-universities)
+```
+
+## Rental Data
+```{list-table}
+:header-rows: 1
+:widths: 10 20 5 5 5 5
+
+* - Filename
+  - Description
+  - Format
+  - Feature
+  - CRS
+  - Source
+* - `20200919_rental_data.csv`
+  - Padmapper Rental Data from 9/19/2020
+  - CSV file
+  - Point
+  - [EPSG:4326](https://epsg.io/4326)
+  - [Jeff Kaufman's Apartment Price Map](https://www.jefftk.com/apartment_prices/details)
+* - `Zip_ZORI_AllHomesPlusMultifamily_SSA.csv`
+  - Zillow Rental Data
+  - CSV file
+  - N/A (zipcodes)
+  - N/A
+  - [Zillow Housing Data](https://www.zillow.com/research/data/)
+```
+
+## Necessities
+Necessities not obtained via `OSMnx`
 
 ```{list-table}
 :header-rows: 1
@@ -67,12 +216,6 @@ To run this notebook, first create the `suitability` environment from the `envir
   - Point
   - [EPSG:26986](https://epsg.io/26986)
   - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-community-health-centers)
-* - `COLLEGES_PT`
-  - Massachusetts Colleges and Universities
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-colleges-and-universities)
 * - `FARMERSMARKETS_PT`
   - Massachusetts Farmers Markets
   - ESRI Shapefile
@@ -91,84 +234,31 @@ To run this notebook, first create the `suitability` environment from the `envir
   - Point
   - [EPSG:26986](https://epsg.io/26986)
   - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-acute-care-hospitals)
-* - `HYDRO25K_POLY`
-  - Massachusetts Surface Water
-  - ESRI Shapefile
-  - Polygon
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-massdep-hydrography-125000)
 * - `LIBRARIES_PT`
   - Massachusetts Public Libraries
   - ESRI Shapefile
   - Point
   - [EPSG:26986](https://epsg.io/26986)
   - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-libraries)
-* - `MBTA_ARC`
-  - MBTA Rapid Transit Lines
-  - ESRI Shapefile
-  - Line
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-rapid-transit)
-* - `MBTABUSSTOPS_PT`
-  - MBTA Bus Stops
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-bus-routes-and-stops)
-* - `MBTABUSROUTES_ARC`
-  - MBTA Bus Routes
-  - ESRI Shapefile
-  - Line
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-bus-routes-and-stops)
-* - `MBTA_NODE`
-  - MBTA Rapid Transit Stops
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-mbta-rapid-transit)
-* - `NEWMASK_POLY`
-  - New England Mask Around Massachusetts
-  - ESRI Shapefile
-  - Polygon
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-new-england-boundaries)
-* - `OUTLINE25K_POLY`
-  - Massachusetts Outline with Detailed Coastline
-  - ESRI Shapefile
-  - Polygon
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-state-outlines)
-* - `TRAINS_NODE`
-  - Massachusetts Train Stations
-  - ESRI Shapefile
-  - Point
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-trains)
-* - `TRAINS_RTE_TRAIN`
-  - MBTA Commuter Rail Routes
-  - ESRI Shapefile
-  - Line
-  - [EPSG:26986](https://epsg.io/26986)
-  - [MassGIS](https://docs.digital.mass.gov/dataset/massgis-data-trains)
+* - `USPS DDUs.csv`
+  - USPS Destination Delivery Units (DDUs) in a specified map extent
+  - [USPS](https://uspstools.maps.arcgis.com/apps/webappviewer/index.html?id=1fc1c26bb31246b39087606c65b83020)
+
 ```  
   
 # Packages Used
-  - numpy
-  - pandas
-  - shapely
-  - geopandas
-  - geopy
-  - geojson
-  - bokeh
-  - matplotlib
-  - seaborn
-  - folium
-  - mplleaflet
-  - networkx
-  - osmnx
+  - `numpy`: computing and working with arrays
+  - `pandas`: data analysis and management
+  - `shapely`: manipulation and analysis of planar geometric objects
+  - `geopandas`: geospatial data analysis and management
+  - `matplotlib`: plotting and visualization
+  - `seaborn`: data visualization
+  - `folium`: interactive maps
+  - `networkx`: network analysis
+  - `osmnx`: work with networks in OpenStreetMap
 
 # Acknowledgements
 
 # References
+- [PEP 8 -- Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/#comments)
 
