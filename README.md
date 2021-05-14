@@ -58,6 +58,7 @@ Choropleth colormaps were standardized based on the type of data to make them ea
 
 # Instructions to Run Notebook
 ## Run Locally
+Anaconda or Miniconda are required to run this notebook locally.
 1. Download all files within the repository. 
 1. In Terminal, navigate to the folder location.
 1. Create the `suitability` environment from the `environment.yml` file.
@@ -69,7 +70,9 @@ Choropleth colormaps were standardized based on the type of data to make them ea
 1. Open the `.ipynb` file and go through cell by cell.
 
 ## Run in Binder
-1. 
+1. Go to this [Binder link](https://mybinder.org/v2/gh/jcheng02/uep239-final-project/HEAD) and wait for it to load.
+1. Open `jcheng02_uep239_final_project.ipynb`.
+1. Restart kernel and run.
 
 ---
 ---
@@ -166,6 +169,3 @@ This suitability analysis was created as a final project for Tufts University's 
 - UEP-239 Homework Assignments 
 - UEP-239 Class Exercises
 - UEP-239 Lectures
-
-
-
